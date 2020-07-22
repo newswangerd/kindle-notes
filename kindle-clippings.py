@@ -72,8 +72,6 @@ def render_markdown(book, title):
                     entry['location'][0]
                 ))
 
-                markdown.append('')
-
         if entry['type'] == 'highlight':
 
             if not format_next:
