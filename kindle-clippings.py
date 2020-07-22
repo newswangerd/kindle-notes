@@ -60,14 +60,20 @@ def render_markdown(book, title):
     format_next = None
     for (index, entry) in enumerate(book):
         if entry['type'] == 'note':
+            format_this = '- '
             for formatter in MARKDOWN_FORMATTERS:
                 if entry['content'].startswith(formatter):
-                    if (len(book) - 1 >= index and book[index + 1]['type'] == 'highlight'):
-                        format_next = formatter
-                    break
+                    if entry['content'] == formatter:
+                        if (len(book) - 1 >= index and book[index + 1]['type'] == 'highlight'):
+                            format_next = formatter
+                        break
+                    else:
+                        format_this = ''
+                        break
 
             if not format_next:
-                markdown.append('- {} (location {})'.format(
+                markdown.append('{}{} (location {})'.format(
+                    format_this,
                     entry['content'],
                     entry['location'][0]
                 ))
