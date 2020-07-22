@@ -36,9 +36,19 @@ def parse_clippings(text):
     return books
 
 
+MARKDOWN_FORMATTERS = [
+    '#####'
+    '####',
+    '###',
+    '##',
+    '#',
+    '-'
+]
+
+
 def render_markdown(book, title):
     def get_location(e):
-        # ensures notes are allways above their highlights
+        # ensures notes are always above their highlights
         if (e['type'] == 'note'):
             return int(e['location'][0]) - 1
         return int(e['location'][1])
@@ -47,29 +57,40 @@ def render_markdown(book, title):
 
     markdown = ['# ' + title, '']
 
-    notes = ['## Notes', '']
-    highlights = ['## Highlighted passages', '']
-
-    for entry in book:
+    format_next = None
+    for (index, entry) in enumerate(book):
         if entry['type'] == 'note':
-            markdown.append('- {} (location {})'.format(
-                entry['content'],
-                entry['location'][0]
-            ))
+            for formatter in MARKDOWN_FORMATTERS:
+                if entry['content'].startswith(formatter):
+                    if (len(book) - 1 >= index and book[index + 1]['type'] == 'highlight'):
+                        format_next = formatter
+                    break
 
-            markdown.append('')
+            if not format_next:
+                markdown.append('- {} (location {})'.format(
+                    entry['content'],
+                    entry['location'][0]
+                ))
+
+                markdown.append('')
 
         if entry['type'] == 'highlight':
-            # markdown.append('- Highlight at location {}-{}'.format(
-            #     entry['location'][0],
-            #     entry['location'][1]
-            # ))
 
-            markdown.append('> ({}-{}) {}'.format(
-                entry['location'][0],
-                entry['location'][1],
-                entry['content'],
-            ))
+            if not format_next:
+                markdown.append('> {} ({}-{})'.format(
+                    entry['content'],
+                    entry['location'][0],
+                    entry['location'][1],
+                ))
+
+            else:
+                markdown.append('{} {} ({}-{})'.format(
+                    format_next,
+                    entry['content'],
+                    entry['location'][0],
+                    entry['location'][1],
+                ))
+                format_next = None
 
             markdown.append('')
 
@@ -148,7 +169,7 @@ def deduplicate(book):
 
 
 def main():
-    raw = load_clippings('./_my_clippings.txt')
+    raw = load_clippings('./MyClippings.txt')
     books = parse_clippings(raw)
     for i, key in enumerate(books.keys()):
         print('{}. {}'.format(i, key))
