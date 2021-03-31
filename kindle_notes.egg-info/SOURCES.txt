@@ -1,0 +1,10 @@
+README.md
+setup.py
+kindle_notes/__init__.py
+kindle_notes/main.py
+kindle_notes.egg-info/PKG-INFO
+kindle_notes.egg-info/SOURCES.txt
+kindle_notes.egg-info/dependency_links.txt
+kindle_notes.egg-info/entry_points.txt
+kindle_notes.egg-info/requires.txt
+kindle_notes.egg-info/top_level.txt

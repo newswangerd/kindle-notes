@@ -1,5 +1,7 @@
+import os
 import re
 from dateutil import parser
+import argparse
 
 
 def parse_clippings(text):
@@ -172,20 +174,31 @@ def deduplicate(book):
     return result + deduped_notes
 
 
+def pars_args():
+    parser = argparse.ArgumentParser(description='Convert kindle clippings into markdown formatted notes.')
+    parser.add_argument('file', nargs=1, help='Kindle clippings file to use.')
+    parser.add_argument('--output', '-o', type=str, dest='output_file', help='Markdown output file. Defaults to the name of the book.')
+
+    return parser.parse_args()
+
+
 def main():
-    raw = load_clippings('./MyClippings.txt')
+    args = pars_args()
+
+    raw = load_clippings(os.path.join(os.getcwd(), args.file[0]))
     books = parse_clippings(raw)
     for i, key in enumerate(books.keys()):
         print('{}. {}'.format(i, key))
 
-    book_index = input("Select a book: ")
-    title = books.keys()[book_index]
+    book_index = int(input("Select a book: "))
+    title = list(books.keys())[book_index]
     selected_book = books[title]
 
     md = render_markdown(deduplicate(selected_book), title)
 
-    with open('out.md', 'w') as f:
+    out_file = os.path.join(os.getcwd(), title + '.md')
+    if args.output_file:
+        out_file = args.output_file
+
+    with open(out_file, 'w') as f:
         f.write(md)
-
-
-main()

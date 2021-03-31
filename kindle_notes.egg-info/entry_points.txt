@@ -1,0 +1,3 @@
+[console_scripts]
+kindle-notes = kindle_notes.main:main
+
