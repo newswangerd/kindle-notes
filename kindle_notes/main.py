@@ -38,17 +38,19 @@ def parse_clippings(text):
     return books
 
 
-MARKDOWN_FORMATTERS = [
-    '#####'
+MARKDOWN_HEADERS = (
+    '#####',
     '####',
     '###',
     '##',
     '#',
-    '-'
-]
+)
 
 
-def render_markdown(book, title):
+MARKDOWN_FORMATTERS = MARKDOWN_HEADERS + ('-',)
+
+
+def render_markdown(book, title, lower_case_titles):
     def get_location(e):
         # ensures notes are always above their highlights
         if (e['type'] == 'note'):
@@ -90,9 +92,13 @@ def render_markdown(book, title):
                 ))
 
             else:
+                content = entry['content']
+                if format_next in MARKDOWN_HEADERS and lower_case_titles:
+                    content = content.capitalize()
+
                 markdown.append('{} {} ({}-{})'.format(
                     format_next,
-                    entry['content'],
+                    content,
                     entry['location'][0],
                     entry['location'][1],
                 ))
@@ -178,6 +184,7 @@ def pars_args():
     parser = argparse.ArgumentParser(description='Convert kindle clippings into markdown formatted notes.')
     parser.add_argument('file', nargs=1, help='Kindle clippings file to use.')
     parser.add_argument('--output', '-o', type=str, dest='output_file', help='Markdown output file. Defaults to the name of the book.')
+    parser.add_argument('--lower', '-l', action='store_true', dest='lower_case_titles', help='Convert headings to use sentence case.')
 
     return parser.parse_args()
 
@@ -194,7 +201,7 @@ def main():
     title = list(books.keys())[book_index]
     selected_book = books[title]
 
-    md = render_markdown(deduplicate(selected_book), title)
+    md = render_markdown(deduplicate(selected_book), title, args.lower_case_titles)
 
     out_file = os.path.join(os.getcwd(), title + '.md')
     if args.output_file:
