@@ -4,6 +4,33 @@ Version: 1.0.0
 Summary: Extract notes from kind clippings and convert them into markdown.
 Home-page: https://github.com/newswangerd/kindle-notes
 License: UNKNOWN
-Description: UNKNOWN
+Description: # Installation
+        
+        ```shell
+        git clone git@github.com:newswangerd/kindle-notes.git
+        pip install -e kindle-notes
+        ```
+        
+        # Usage
+        
+        ## Taking Notes
+        
+        `kindle-notes` allows insterting some basic formatting on your kindle while you're taking notes. For example, highlighting a piece of text and adding `-` or `#`, `##`, `###`... etc will format the highlighted block of text with the selected markdown formatter.
+        
+        For example highlighting "Example Heading" with `##` will result in:
+        
+        ```markdown
+        ## Example Heading
+        ```
+        
+        In your exported notes. This can be used to mark chapter titles and subheadings to make it easier to get around your notes.
+        
+        ## Exporting Notes
+        
+        To export your notes, simply copy the `My Clippings.txt` file off of your kindle and run the following commands
+        
+        ```shell
+        
+        ```
 Platform: UNKNOWN
 Description-Content-Type: text/markdown

@@ -209,3 +209,4 @@ def main():
 
     with open(out_file, 'w') as f:
         f.write(md)
+        print(f"Notes saved to {out_file}.")

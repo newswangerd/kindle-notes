@@ -1,0 +1,35 @@
+My Example Book
+- Your Note on page 234 | Location 3588 | Added on Wednesday, March 31, 2021 1:45:42 PM
+
+###
+==========
+My Example Book
+- Your Highlight on page 234 | Location 3588-3588 | Added on Wednesday, March 31, 2021 1:45:42 PM
+
+I'm a level 3 header
+==========
+My Example Book
+- Your Highlight on page 215 | Location 3285-3286 | Added on Tuesday, March 30, 2021 7:55:27 PM
+
+I'm a highlight with a note.
+==========
+My Example Book
+- Your Note on page 215 | Location 3286 | Added on Tuesday, March 30, 2021 7:55:46 PM
+
+I'm a note!
+==========
+My Example Book
+- Your Highlight on page 234 | Location 3588-3588 | Added on Wednesday, March 31, 2021 1:45:42 PM
+
+I'm another highlight
+==========
+My Example Book
+- Your Note on page 234 | Location 3600 | Added on Wednesday, March 31, 2021 1:45:42 PM
+
+-
+==========
+My Example Book
+- Your Highlight on page 234 | Location 3600-3600 | Added on Wednesday, March 31, 2021 1:45:42 PM
+
+I'm a highlight that will appear as a bullet.
+==========
