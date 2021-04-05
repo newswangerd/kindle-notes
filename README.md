@@ -31,7 +31,7 @@ Removing duplicates 0
 Notes saved to /home/david/code/kindle-notes/examples/My Example Book.md.
 ```
 
-This will produce the following markdown file, which you can see here: [Example Notes](examples/My Example Book.md)
+This will produce the following markdown file, which you can see here: [Example Notes](examples/My%20Example%20Book.md)
 
 ```
 # My Example Book
